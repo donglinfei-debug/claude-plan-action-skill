@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.1.0 (2026-06-20)
+
+### ✨ Workflow 驱动升级
+
+- **SKILL.md**：从手动提示词驱动升级为 Workflow 工具驱动
+  - 规划阶段：调用 `pre-planning-orchestrator`，显示 `[L1] Controller` 实时标签
+  - 执行阶段：调用 `controller-workflow`，显示 L1→L2→L3 全链路标签
+  - 用户确认关卡保留：规划后等待确认，确认后进入执行
+- **文档**：`docs/plan-action-guide.md` 第八章更新安装说明、目录结构和配置步骤
+- **示例**：`AGENT_REGISTRY.example.json` 新增 L1 Controller 角色
+
 ## v1.0.0 (2026-06-20)
 
 ### ✨ 初始发布

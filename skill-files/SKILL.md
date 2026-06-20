@@ -5,82 +5,123 @@ description: 全盘任务规划 — 分析需求、拆解子任务、调度 Agen
 
 # /plan-action — 全盘任务规划
 
-当用户输入 `/plan-action` 时，启动结构化任务规划模式。
+当用户输入 `/plan-action` 时，进入**结构化规划模式**。规划阶段通过 Workflow 工具调度 `pre-planning-orchestrator` 实现，规划完成经你确认后，转入 `controller-workflow` 执行。
 
-## 执行流程
+## 执行流程（两个 Workflow 阶段）
 
-### 第 1 步：需求解析
-- 将用户原始需求转化为结构化概要
-- 判定类型（新项目 / 现有项目变更）
-- 提炼范围边界和目标
-- 识别技术约束
-- 标记所有需用户决策的点
+### 前置准备：收集审计数据
 
-### 第 2 步：Agent + Skill + MCP 审计
-- 查 Agent 注册表 → 确定 L2→L3 调度链
-- 扫 `skills/` 目录 + 技能表 → 标注可用/缺失
-- 列出可用的 MCP 工具
-- 识别能力缺口
+在调 Workflow 之前，先读取以下数据作为 Workflow 的输入参数：
 
-### 第 3 步：可行性评估
-- Agent 完整度：注册表中都有吗？
-- Skill 覆盖度：缺的怎么补？
-- 技术栈可行度
-- 依赖风险：外部 API/服务是否可获取？
-- 输出风险清单 + 缓解措施
+1. 读取 `AGENT_REGISTRY.json` → 得到 `agentRegistry`
+2. 扫描 `skills/` 目录（含 `CLAUDE.md` 技能表）→ 得到 `availableSkills`
+3. 判断 `projectType`（新项目 / 已有项目变更）
 
-### 第 4 步：输出 5 模块方案
-按以下模板输出，等待用户确认后方可执行：
+### 第 1-4 步：调用 Workflow( pre-planning-orchestrator )
+
+调用 Workflow 工具，执行前置规划编排：
+
+```
+Workflow({
+  name: "pre-planning-orchestrator",
+  args: {
+    userRequest: "<用户原始需求>",
+    projectType: "新项目 / 已有项目变更",
+    availableSkills: [...],
+    agentRegistry: { agents: [...] },
+    techConstraints: "<技术约束>",
+    hasCodebase: true/false
+  }
+})
+```
+
+Workflow 执行过程中将依次显示：
+- `[L1] Controller: 需求解析与Agent分解中...`
+- `[L1] Controller: 技能审计中...`
+- `[L1] Controller: 可行性评估中...`
+- `[L1] Controller: 执行计划生成中...`
+
+Workflow 返回结构化结果后，按以下 5 模块格式呈现给你：
 
 ```
 [L1] Controller | 任务分级：X 级
 
 ① 目标理解与拆分
-   核心需求：xxx
-   拆解子目标：xxx
-   边界与约束：xxx
+   核心需求：<plan.taskSummary.coreGoal>
+   拆解子目标：<plan.agentPlan 中各 Agent 职责>
+   边界与约束：<techConstraints>
 
 ② 技术路径与资源调度
-   L2 链：planner → architect → deployer
-   L3 SubAgent：xxx
-   Skill：xxx
-   MCP：xxx
+   L2 链：<decomposition.agentChain>
+   L3 SubAgent：<decomposition.l3Breakdown>
+   Skill 覆盖：<skillReport.coverageRate>（缺失：<missingItems>）
+   风险项：<risks.length> 项
 
 ③ 缺口与需协助事项
-   ❌ 缺失 Skill：xxx → 影响
-   ⚠️ 需你决策：xxx
+   ❌ 缺失 Skill：[缺失清单] → 影响/建议
+   ⚠️ 需你决策：[决策点]
 
 ④ 工作计划和节点
-   节点 1：xxx (目标/验收/交付物/负责人/工作量)
-   节点 2：xxx
+   <phases 中每个阶段：阶段名 / 验收标准 / 交付物 / 预估轮次>
 
 ⑤ 任务编排
-   [串联] xxx → xxx
-   [并行] xxx / xxx
-   风险：xxx → 兜底：xxx
+   执行顺序：<callingOrder>
+   风险与兜底：[风险清单]
 ```
 
 ### 第 5 步：等待确认
-- 用户确认 → 进入标准执行流程
-- 用户要求调整 → 修改后重新展示
-- 用户否决 → 结束
+
+- 你确认 → 进入执行阶段（第 6 步）
+- 你要求调整 → 重新生成或修改参数后重跑
+- 你否决 → 结束
+
+### 第 6 步：调用 Workflow( controller-workflow ) 执行
+
+收到确认后，调用 Workflow 工具执行完整任务编排：
+
+```
+Workflow({
+  name: "controller-workflow",
+  args: {
+    userRequest: "<用户原始需求>",
+    prePlan: {
+      level: "<分级>",
+      agentChain: "<L2链>",
+      l3Breakdown: "<L3分解>"
+    }
+  }
+})
+```
+
+Workflow 执行过程中将依次显示：
+- `[L1] Controller: 任务分级判断中...`
+- `[L2] Planner: 产品域工作中...`（仅 S/A 级需要）
+- `[L2] Architect: 研发域工作中...`
+  - `[L3] Coder: 编码中... (节点 N)`
+  - `[L3] Reviewer: 审查中... (节点 N)`
+  - `[L3] Tester: 测试中... (节点 N)`
+- `[L2] Deployer: 运维域工作中...`（仅 S 级需要）
 
 ## 重要规则
 
-1. **不得在输出方案前直接编码或回答**
-2. B 级以下任务可简化流程，但仍需输出简略方案
-3. 必须等待用户书面确认后才开始执行
+1. **规划阶段不编码** — pre-planning-orchestrator 只输出方案，不写代码
+2. **必须等待你书面确认后才进入执行阶段**
+3. **你确认后 controller-workflow 全权执行**，中间不再打断
+4. B 级以下任务可简化：pre-planning 会跳过技能审计和可行性评估阶段
+5. C 级任务 pre-planning 直接返回，无需走 controller-workflow 执行
 
 ## 任务分级参考
 
-| 级别 | 适用场景 | 规划深度 |
-|:----:|:---------|:---------|
-| S | 新项目、架构变更 | 完整 5 步 |
-| A | 多文件、有决策 | 完整 5 步 |
-| B | 单文件修改 | 简化 3 步 |
-| C | 纯执行 | 直接做 |
+| 级别 | 适用场景 | 规划深度 | 执行链 |
+|:----:|:---------|:---------|:-------|
+| S | 新项目、架构变更 | 完整 4 阶段 | planner→architect→deployer |
+| A | 多文件、有决策 | Agent分解+审计+评估 | planner→architect |
+| B | 单文件修改 | Agent 分解（跳过审计/评估） | architect |
+| C | 纯执行 | 直接返回 | 无 |
 
 ## 文件依赖
 
-- `AGENT_REGISTRY.json`（可选）— Agent 注册表，用于资源审计
-- `CLAUDE.md` — 技能清单，用于 Skill 审计
+- `AGENT_REGISTRY.json` — Agent 注册表，传给 pre-planning-orchestrator
+- `CLAUDE.md` — 技能清单，用于扫描 availableSkills
+- `.claude/workflows/pre-planning-orchestrator.js` — 规划阶段 Workflow 脚本
+- `.claude/workflows/controller-workflow.js` — 执行阶段 Workflow 脚本
