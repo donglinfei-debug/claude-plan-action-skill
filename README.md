@@ -26,17 +26,21 @@
 
 ## 🚀 Quick Start
 
-### 1. Copy the skill file
+### 1. Clone the repository
 
 ```bash
-# Create the directory in your Claude Code workspace
-mkdir -p skills/plan-action
-
-# Copy SKILL.md from this repository
-cp claude-plan-action-skill/skill-files/SKILL.md skills/plan-action/
+git clone https://github.com/donglinfei-debug/claude-plan-action-skill.git
+cd claude-plan-action-skill
 ```
 
-### 2. Register in your project
+### 2. Copy the skill file to your Claude Code workspace
+
+```bash
+mkdir -p /path/to/your/skills/plan-action
+cp skill-files/SKILL.md /path/to/your/skills/plan-action/
+```
+
+### 3. Register in your project
 
 Add this line to your project's `CLAUDE.md` skill registry:
 
@@ -44,7 +48,7 @@ Add this line to your project's `CLAUDE.md` skill registry:
 | plan-action | `skills/plan-action/` | Full-task planning — decompose requirements, schedule Agents and Skills, output execution plan | `/plan-action {description}` | Describe your requirement directly |
 ```
 
-### 3. Use it
+### 4. Use it
 
 ```bash
 /plan-action Build a user authentication system for my Flask app
@@ -99,7 +103,13 @@ AI Coding's 3 Core Problems → Structured Planning's 3 Constraints
 
 ## 📄 License
 
-[MIT](LICENSE) © 2026
+[MIT](LICENSE) © 2026 Ryan Dong
+
+## 📬 Contact
+
+- **Author**: Ryan Dong
+- **Email**: donglinfei@gmail.com
+- **GitHub**: [donglinfei-debug](https://github.com/donglinfei-debug)
 
 ---
 

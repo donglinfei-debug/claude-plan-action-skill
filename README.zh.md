@@ -26,17 +26,21 @@
 
 ## 🚀 快速开始
 
-### 1. 复制技能文件
+### 1. 克隆仓库
 
 ```bash
-# 在你的 Claude Code 工作区创建目录
-mkdir -p skills/plan-action
-
-# 从本仓库复制 SKILL.md
-cp claude-plan-action-skill/skill-files/SKILL.md skills/plan-action/
+git clone https://github.com/donglinfei-debug/claude-plan-action-skill.git
+cd claude-plan-action-skill
 ```
 
-### 2. 注册到项目
+### 2. 复制技能文件到你的 Claude Code 工作区
+
+```bash
+mkdir -p /path/to/your/skills/plan-action
+cp skill-files/SKILL.md /path/to/your/skills/plan-action/
+```
+
+### 3. 注册到项目
 
 在项目 `CLAUDE.md` 的技能清单中添加一行：
 
@@ -44,7 +48,7 @@ cp claude-plan-action-skill/skill-files/SKILL.md skills/plan-action/
 | plan-action | `skills/plan-action/` | 全盘任务规划 — 分析需求、拆解子任务、调度 Agent 和 Skill、输出执行方案 | `/plan-action {描述}` | 直接在对话中描述需求 |
 ```
 
-### 3. 使用
+### 4. 使用
 
 ```
 /plan-action 给我的 Flask 项目加一个用户认证系统
@@ -99,7 +103,13 @@ AI 编程的 3 大问题 → 结构化规划的 3 个约束
 
 ## 📄 许可证
 
-[MIT](LICENSE) © 2026
+[MIT](LICENSE) © 2026 Ryan Dong
+
+## 📬 联系方式
+
+- **作者**: Ryan Dong
+- **邮箱**: donglinfei@gmail.com
+- **GitHub**: [donglinfei-debug](https://github.com/donglinfei-debug)
 
 ---
 
