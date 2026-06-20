@@ -1,0 +1,76 @@
+{
+  "description": "Agent 注册表示例 — 修改为你的实际 Agent 配置",
+  "version": "1.0.0",
+  "agents": [
+    {
+      "id": "planner",
+      "level": 2,
+      "domain": "product",
+      "description": "产品需求分析和文档撰写",
+      "skills": ["doc-writer"],
+      "enabled": true
+    },
+    {
+      "id": "architect",
+      "level": 2,
+      "domain": "engineering",
+      "description": "技术架构设计和代码实现",
+      "skills": ["coder", "reviewer", "tester"],
+      "enabled": true
+    },
+    {
+      "id": "deployer",
+      "level": 2,
+      "domain": "operations",
+      "description": "部署、配置和发布管理",
+      "skills": [],
+      "enabled": false
+    },
+    {
+      "id": "coder",
+      "level": 3,
+      "domain": "engineering",
+      "description": "具体代码编写实现",
+      "parent": "architect",
+      "enabled": true
+    },
+    {
+      "id": "reviewer",
+      "level": 3,
+      "domain": "engineering",
+      "description": "代码审查和质量控制",
+      "parent": "architect",
+      "enabled": true
+    },
+    {
+      "id": "tester",
+      "level": 3,
+      "domain": "engineering",
+      "description": "测试用例编写和执行",
+      "parent": "architect",
+      "enabled": true
+    },
+    {
+      "id": "doc-writer",
+      "level": 3,
+      "domain": "product",
+      "description": "技术文档和用户指南撰写",
+      "parent": "planner",
+      "enabled": true
+    }
+  ],
+  "skills": [
+    {
+      "id": "docx",
+      "description": "创建、编辑、处理 Word 文档"
+    },
+    {
+      "id": "code-review",
+      "description": "代码审查（Bug/安全/性能/可维护性）"
+    },
+    {
+      "id": "html-ppt-maker",
+      "description": "制作 HTML 幻灯片"
+    }
+  ]
+}
