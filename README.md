@@ -18,6 +18,18 @@
 
 A structured task planning methodology packaged as a Claude Code skill. Transforms how you interact with AI for complex coding tasks — eliminating guesswork, reducing rework, and delivering production-quality code on the first try.
 
+
+## 📌 Why This?
+
+| Before (Direct Prompting) | After (Structured Planning) |
+|:--------------------------|:----------------------------|
+| 🤯 AI guesses your intent → writes wrong code → rework cycle | 🎯 AI analyzes requirements → produces a plan → you approve → executes correctly |
+| 🧠 Forgets early decisions after 10 conversation rounds | 📋 Locks decisions in a written plan before coding starts |
+| 🔍 Discovers all problems at the very end | ✅ Catches issues at each milestone, one at a time |
+| ⏱️ Wastes tokens on hallucinated approaches | 💰 Every token works toward an approved direction |
+
+**Claude Plan Action Skill** transforms how you interact with Claude Code for complex coding tasks — eliminating guesswork, reducing rework, and delivering production-quality code on the first try.
+
 ## 🏗️ Workflow
 
 ```mermaid
@@ -82,6 +94,13 @@ claude-plan-action-skill/
 └── README.md / README.zh.md
 ```
 
+
+
+---
+
+## 🔍 Keywords & Search Terms
+
+**IBKR options trading automation**, **Interactive Brokers Python API**, **options trading bot architecture**, **Iron Condor strategy automation**, **SPX options trading**, **IBKR API connection management**, **automated options trading system**, **TWS API Python**, **IB Gateway integration**, **options chain data fetching**, **limit order price adjustment**, **trading risk control debounce**, **Feishu bot notification**, **DingTalk webhook integration**, **Gmail AI summary notification**, **Google Apps Script Gmail monitoring**, **AI subtitle proofreading**, **ASR speech recognition**, **DeepSeek API integration**, **Alibaba Cloud fun-asr**, **subtitle generation automation**, **Claude Code planning skill**, **AI structured planning framework**, **GitHub public-prep security scan**, **open source project sanitization**, **secret detection automation**, **public repository checklist**
 ## 📄 License
 
 MIT © 2026 Ryan Dong
