@@ -96,11 +96,20 @@ claude-plan-action-skill/
 
 
 
----
+## ❓ FAQ
 
-## 🔍 Keywords & Search Terms
+**Does this work with any Claude Code version?**
+Yes. It works with the latest Claude Code CLI. Copy the SKILL.md to your .claude/skills/ directory and it's ready to use.
 
-**IBKR options trading automation**, **Interactive Brokers Python API**, **options trading bot architecture**, **Iron Condor strategy automation**, **SPX options trading**, **IBKR API connection management**, **automated options trading system**, **TWS API Python**, **IB Gateway integration**, **options chain data fetching**, **limit order price adjustment**, **trading risk control debounce**, **Feishu bot notification**, **DingTalk webhook integration**, **Gmail AI summary notification**, **Google Apps Script Gmail monitoring**, **AI subtitle proofreading**, **ASR speech recognition**, **DeepSeek API integration**, **Alibaba Cloud fun-asr**, **subtitle generation automation**, **Claude Code planning skill**, **AI structured planning framework**, **GitHub public-prep security scan**, **open source project sanitization**, **secret detection automation**, **public repository checklist**
+**How does task classification work?**
+Requests are classified as S/A/B/C based on complexity, risk, and number of files involved. Each level has an appropriate planning depth — from full 5-module plan (S/A) to simple checklist (B/C).
+
+**Can I modify the planning template?**
+Yes. The PLAN_TEMPLATE.md in skill-files/ is fully customizable. Adjust the sections to match your team's workflow.
+
+**Does this work with other AI coding tools besides Claude Code?**
+The skill format is designed for Claude Code, but the planning methodology (5-module framework) is tool-agnostic and can be adapted to any AI coding assistant.
+
 ## 📄 License
 
 MIT © 2026 Ryan Dong
@@ -108,6 +117,23 @@ MIT © 2026 Ryan Dong
 ## 🌟 Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=donglinfei-debug/claude-plan-action-skill&type=Date)](https://star-history.com/#donglinfei-debug/claude-plan-action-skill&Date)
+
+
+
+## 👤 About the Author
+
+**Ryan Dong** — AI Product Manager & Full-Stack Developer
+
+I bridge the gap between AI capabilities and production-ready software. My work spans the full stack: from designing AI-powered product features and integrating LLM APIs, to building modular backend services and shipping clean, documented code.
+
+| Role | Focus |
+|:-----|:------|
+| 🧠 **AI Product Manager** | Product strategy, AI feature design, prompt engineering, model selection |
+| 💻 **Full-Stack Developer** | Python, FastAPI, Google Apps Script, automation pipelines, API integration |
+
+This repository is part of a personal toolbox — a growing collection of practical, reusable modules that solve real automation problems. Each project is designed to be independently useful and easily integrated into larger systems.
+
+📬 **donglinfei@gmail.com** — open to business discussions, collaborations, and recruiting inquiries.
 
 ## 📬 Contact
 
