@@ -1,21 +1,55 @@
+<div align="center">
+
 # 🧠 Claude Plan Action Skill
 
-> **Stop guessing. Start planning.** A structured planning framework for Claude Code that eliminates AI hallucinations, reduces rework, and delivers production-quality code on the first try.
+**Stop guessing. Start planning. — A structured planning framework for Claude Code**
 
-![License](https://img.shields.io/badge/license-MIT-green)
-![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-blue)
+[![GitHub Stars](https://img.shields.io/github/stars/donglinfei-debug/claude-plan-action-skill?style=flat-square&logo=github)](https://github.com/donglinfei-debug/claude-plan-action-skill/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/donglinfei-debug/claude-plan-action-skill?style=flat-square&logo=github)](https://github.com/donglinfei-debug/claude-plan-action-skill/issues)
+[![GitHub Forks](https://img.shields.io/github/forks/donglinfei-debug/claude-plan-action-skill?style=flat-square&logo=github)](https://github.com/donglinfei-debug/claude-plan-action-skill/forks)
+[![License](https://img.shields.io/github/license/donglinfei-debug/claude-plan-action-skill?style=flat-square)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-blue.svg?style=flat-square&logo=anthropic)](https://claude.ai)
+
+🌏 **Language / 语言**：[🇨🇳 中文](README.zh.md) | [🇬🇧 English](README.md)
+
+</div>
 
 ---
 
-## 📖 What is This?
+A structured task planning methodology packaged as a Claude Code skill. Transforms how you interact with AI for complex coding tasks — eliminating guesswork, reducing rework, and delivering production-quality code on the first try.
 
-**Claude Plan Action** is a structured task planning methodology packaged as a Claude Code skill. It transforms how you interact with AI for complex coding tasks:
+## 🏗️ Workflow
 
-| Before (Direct Prompting) | After (Structured Planning) |
-|:--------------------------|:----------------------------|
-| AI guesses your intent → writes wrong code → rework cycle | AI analyzes requirements → produces a plan → you approve → executes correctly |
-| Forgets early decisions after 10 rounds | Locks decisions in written plan before coding |
-| Discovers all problems at the end | Catches issues at each milestone |
+```mermaid
+flowchart TB
+    subgraph Input["📥 Input"]
+        REQ[User Request]
+    end
+    subgraph Analyze["🔍 1. Analyze"]
+        CLS[Task Classification<br/>S/A/B/C Levels]
+        DEC[Requirement Breakdown<br/>Scope & Constraints]
+    end
+    subgraph Plan["📋 2. Plan"]
+        AUD[Resource Audit<br/>Agent · Skill · MCP]
+        FEA[Feasibility Assessment<br/>5-Dimension Evaluation]
+        MIL[Milestone Plan<br/>Nodes · Deliverables]
+    end
+    subgraph Execute["⚡ 3. Execute"]
+        APP[Approval → Execution<br/>Code · Review · Test]
+    end
+
+    REQ --> CLS --> DEC
+    DEC --> AUD --> FEA --> MIL
+    MIL --> APP
+
+    style REQ fill:#6366f1,color:#fff,stroke:none
+    style CLS fill:#0ea5e9,color:#fff,stroke:none
+    style DEC fill:#0ea5e9,color:#fff,stroke:none
+    style AUD fill:#0ea5e9,color:#fff,stroke:none
+    style FEA fill:#0ea5e9,color:#fff,stroke:none
+    style MIL fill:#0ea5e9,color:#fff,stroke:none
+    style APP fill:#10b981,color:#fff,stroke:none
+```
 
 ## ✨ Core Features
 
@@ -24,93 +58,38 @@
 - **✅ Human-in-the-Loop** — No code is written before you approve the plan
 - **🔧 Self-Contained** — Copy the SKILL.md, register it, and it works immediately
 
-## 🚀 Quick Start
+## 📦 Requirements
 
-### 1. Clone the repository
+| Requirement | Details |
+|:------------|:--------|
+| **Claude Code** | Latest version |
+| **Installation** | Copy SKILL.md to `.claude/skills/` or use `/plan-action` |
 
-```bash
-git clone https://github.com/donglinfei-debug/claude-plan-action-skill.git
-cd claude-plan-action-skill
-```
-
-### 2. Copy the skill file to your Claude Code workspace
-
-```bash
-mkdir -p /path/to/your/skills/plan-action
-cp skill-files/SKILL.md /path/to/your/skills/plan-action/
-```
-
-### 3. Register in your project
-
-Add this line to your project's `CLAUDE.md` skill registry:
-
-```markdown
-| plan-action | `skills/plan-action/` | Full-task planning — decompose requirements, schedule Agents and Skills, output execution plan | `/plan-action {description}` | Describe your requirement directly |
-```
-
-### 4. Use it
-
-```bash
-/plan-action Build a user authentication system for my Flask app
-```
-
-Claude will respond with a structured plan instead of jumping straight into code.
-
-## 📂 Repository Structure
+## 📁 Structure
 
 ```
-├── README.md                          # English homepage
-├── README.zh.md                       # Chinese homepage
-├── CHANGELOG.md                       # Version history
-│
+claude-plan-action-skill/
+├── SKILL.md                    # Skill definition (copy to .claude/skills/)
+├── skill-files/
+│   ├── SKILL.md                # Full skill source
+│   ├── PLAN_TEMPLATE.md        # Execution plan template
+│   └── AGENT_REGISTRY.example.json
 ├── docs/
-│   └── plan-action-guide.md           # ★ Full guide (10 chapters + 3 appendices)
-│
-└── skill-files/
-    ├── SKILL.md                       # Reusable skill definition
-    ├── PLAN_TEMPLATE.md               # 5-module planning template
-    └── AGENT_REGISTRY.example.json    # Agent registry example
-```
-
-## 📖 Read the Full Guide
-
-For the complete methodology, principles, and best practices:
-
-➡️ **[Full Guide — docs/plan-action-guide.md](docs/plan-action-guide.md)**
-
-Covers:
-- Why structured planning prevents AI hallucination
-- 5-step workflow with detailed explanations
-- Task classification system (S/A/B/C)
-- Agent + Skill resource audit
-- Feasibility assessment model
-- Complete examples and templates
-
-## 🧠 Why It Works
-
-```
-AI Coding's 3 Core Problems → Structured Planning's 3 Constraints
-
-① Vague instructions → AI free-associates
-    → Requirement analysis template eliminates ambiguity
-
-② Long context loss → AI forgets early decisions
-    → Written plan locks decisions before coding starts
-
-③ No validation gates → Hidden defects accumulate
-    → Milestone-based acceptance catches issues early
+│   ├── plan-action-guide.md    # Comprehensive usage guide
+│   └── scan-results.md
+├── CHANGELOG.md
+├── LICENSE                     # MIT
+└── README.md / README.zh.md
 ```
 
 ## 📄 License
 
-[MIT](LICENSE) © 2026 Ryan Dong
+MIT © 2026 Ryan Dong
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=donglinfei-debug/claude-plan-action-skill&type=Date)](https://star-history.com/#donglinfei-debug/claude-plan-action-skill&Date)
 
 ## 📬 Contact
 
-- **Author**: Ryan Dong
-- **Email**: donglinfei@gmail.com
-- **GitHub**: [donglinfei-debug](https://github.com/donglinfei-debug)
-
----
-
-> Plan first. Code second. Rework never.
+Ryan Dong — donglinfei@gmail.com

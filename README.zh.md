@@ -1,179 +1,95 @@
+<div align="center">
+
 # 🧠 Claude Plan Action Skill（结构化规划技能）
 
-> **告别 AI 的"自由发挥"。** 一个 Claude Code 的结构化规划框架——消除 AI 幻觉、减少返工、一次交付高质量代码。
+**告别 AI 的"自由发挥"—— Claude Code 结构化规划框架**
 
-![License](https://img.shields.io/badge/license-MIT-green)
-![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-blue)
+[![GitHub Stars](https://img.shields.io/github/stars/donglinfei-debug/claude-plan-action-skill?style=flat-square&logo=github)](https://github.com/donglinfei-debug/claude-plan-action-skill/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/donglinfei-debug/claude-plan-action-skill?style=flat-square&logo=github)](https://github.com/donglinfei-debug/claude-plan-action-skill/issues)
+[![GitHub Forks](https://img.shields.io/github/forks/donglinfei-debug/claude-plan-action-skill?style=flat-square&logo=github)](https://github.com/donglinfei-debug/claude-plan-action-skill/forks)
+[![License](https://img.shields.io/github/license/donglinfei-debug/claude-plan-action-skill?style=flat-square)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-兼容-blue.svg?style=flat-square&logo=anthropic)](https://claude.ai)
+
+🌏 **语言 / Language**：[🇨🇳 中文](README.zh.md) | [🇬🇧 English](README.md)
+
+</div>
 
 ---
 
-## 📖 这是什么？
+一个 Claude Code 的结构化规划框架——消除 AI 幻觉、减少返工、一次交付高质量代码。通过任务分级（S/A/B/C）、资源审计、五维评估、里程碑规划，确保复杂需求在动手编码前已有清晰的执行方案。
 
-**Claude Plan Action** 是一个结构化的任务规划方法论，打包为 Claude Code 技能。它改变了你与 AI 协作复杂任务的方式——
-
-| 传统做法（直接提问） | 结构化规划 |
-|:--------------------|:-----------|
-| AI 猜测你的意图 → 写错代码 → 反复返工 | AI 分析需求 → 输出方案 → 你确认 → 正确执行 |
-| 聊了 10 轮后忘记早期决策 | 用书面方案在编码前锁定决策 |
-| 最后才发现所有问题 | 每个节点分阶段验收 |
-
-## ✨ 核心亮点
-
-- **🎯 5 模块规划框架** — 目标拆解、资源审计、可行性评估、工作计划、任务编排
-- **📊 任务分级** — S/A/B/C 四级，不同复杂度匹配不同的规划深度
-- **✅ 人在回路中** — 方案未经你确认，AI 不得写一行代码
-- **🔧 开箱即用** — 复制 SKILL.md 文件、注册到技能清单，立刻可用
-
-## 🚀 快速开始
-
-### 1. 克隆仓库
-
-```bash
-git clone https://github.com/donglinfei-debug/claude-plan-action-skill.git
-cd claude-plan-action-skill
-```
-
-### 2. 复制技能文件到你的 Claude Code 工作区
-
-```bash
-mkdir -p /path/to/your/skills/plan-action
-cp skill-files/SKILL.md /path/to/your/skills/plan-action/
-```
-
-### 3. 注册到项目
-
-在项目 `CLAUDE.md` 的技能清单中添加一行：
-
-```markdown
-| plan-action | `skills/plan-action/` | 全盘任务规划 — 分析需求、拆解子任务、调度 Agent 和 Skill、输出执行方案 | `/plan-action {描述}` | 直接在对话中描述需求 |
-```
-
-### 4. 使用
-
-```
-/plan-action 给我的 Flask 项目加一个用户认证系统
-```
-
-Claude 会输出结构化方案，而不是直接写代码。
-
-## 📂 仓库结构
-
-```
-├── README.md                          # 英文首页
-├── README.zh.md                       # 中文首页
-├── CHANGELOG.md                       # 版本历史
-│
-├── docs/
-│   └── plan-action-guide.md           # ★ 完整指南（10章 + 3附录）
-│
-└── skill-files/
-    ├── SKILL.md                       # 可复用的技能定义
-    ├── PLAN_TEMPLATE.md               # 5 模块方案模板
-    └── AGENT_REGISTRY.example.json    # Agent 注册表示例
-```
-
-## 📖 阅读完整指南
-
-完整的方法论、原理和最佳实践请阅读：
-
-➡️ **[完整指南 — docs/plan-action-guide.md](docs/plan-action-guide.md)**
-
-包含：
-- 结构化规划如何防止 AI 幻觉
-- 5 步流程详解
-- 任务分级系统（S/A/B/C）
-- Agent + Skill 资源审计方法
-- 可行性评估模型
-- 完整示例和模板
-
-## 🧠 核心原理
-
-```
-AI 编程的 3 大问题 → 结构化规划的 3 个约束
-
-① 指令模糊 → AI 自由发挥
-    → 需求解析模板消除模糊性
-
-② 长上下文丢失 → AI 忘记早期决策
-    → 书面方案在编码前锁定决策
-
-③ 缺乏校验节点 → 隐藏缺陷累积
-    → 节点验收标准在早期捕获问题
-```
-
-## 🚀 方法论全景
-
-> 以下全景内容也见于 [个人工具箱](https://github.com/donglinfei-debug/claude-plan-action-skill) 的可视化版本。
-
-### 1. 任务分级体系 <sup>S/A/B/C 四级</sup>
-
-| 级别 | 类型 | 场景 | 流程要求 |
-|:----|:-----|:-----|:---------|
-| **S 级** | 战略级 | 跨项目/架构变更 | 完整 5 步 + Agent 链 |
-| **A 级** | 复杂级 | 多文件 + 设计决策 | 完整 5 步（可简化审计） |
-| **B 级** | 常规级 | 单文件 / 逻辑清晰 | 简化版：解析 + 方案 + 确认 |
-| **C 级** | 简单级 | 纯执行 / 无歧义 | 直接处理，报备即可 |
-
-> **快速判定**：1 文件 → B/C · 2-5 文件 → A/B · 5+ 文件 → S/A · 有架构决策 → S/A · 高风险 → S
-
-### 2. 两阶段执行流程
+## 🏗️ 工作流程
 
 ```mermaid
-flowchart LR
-    subgraph 规划阶段
-        A[前置准备] --> B[需求解析]
-        B --> C[技能审计]
-        C --> D[可行性评估]
-        D --> E[生成方案]
+flowchart TB
+    subgraph Input["📥 输入"]
+        REQ[用户需求]
     end
-    E --> F{你确认方案}
-    F -->|确认| G[分级执行]
-    subgraph 执行阶段
-        G --> H[L2 产品域]
-        H --> I[L2 研发域]
-        I --> J[L3 编码→审查→测试]
-        J --> K[L2 部署]
+    subgraph Analyze["🔍 1. 分析"]
+        CLS[任务分级<br/>S/A/B/C 四级]
+        DEC[需求拆解<br/>范围与约束]
     end
+    subgraph Plan["📋 2. 规划"]
+        AUD[资源审计<br/>Agent · Skill · MCP]
+        FEA[可行性评估<br/>五维评估]
+        MIL[工作计划<br/>节点 · 交付物]
+    end
+    subgraph Execute["⚡ 3. 执行"]
+        APP[确认 → 编码<br/>审查 · 测试]
+    end
+
+    REQ --> CLS --> DEC
+    DEC --> AUD --> FEA --> MIL
+    MIL --> APP
+
+    style REQ fill:#6366f1,color:#fff,stroke:none
+    style CLS fill:#0ea5e9,color:#fff,stroke:none
+    style DEC fill:#0ea5e9,color:#fff,stroke:none
+    style AUD fill:#0ea5e9,color:#fff,stroke:none
+    style FEA fill:#0ea5e9,color:#fff,stroke:none
+    style MIL fill:#0ea5e9,color:#fff,stroke:none
+    style APP fill:#10b981,color:#fff,stroke:none
 ```
 
-### 3. 三层 Agent 架构
+## ✨ 核心功能
+
+- **🎯 5 模块规划框架** — 目标拆解、资源审计、可行性评估、里程碑规划、任务编排
+- **📊 任务分级** — S/A/B/C 四级，按级别决定规划深度
+- **✅ 人在回路** — 方案经你确认后才开始编码
+- **🔧 即装即用** — 复制 SKILL.md 注册即可使用
+
+## 📦 系统要求
+
+| 要求 | 说明 |
+|:-----|:------|
+| **Claude Code** | 最新版 |
+| **安装方式** | 将 SKILL.md 复制到 `.claude/skills/` 目录 |
+
+## 📁 文件结构
 
 ```
-L1 Controller         总控（分级 + 调度）
- ├── L2 Planner       产品域主
- │    ├── L3 req-writer    需求 / PRD
- │    └── L3 doc-writer    技术文档
- ├── L2 Architect     架构与研发域主
- │    ├── L3 Coder         编码
- │    ├── L3 Reviewer      审查
- │    └── L3 Tester        测试
- └── L2 Deployer      运维域主
+claude-plan-action-skill/
+├── SKILL.md                    # Skill 定义（复制到 .claude/skills/）
+├── skill-files/
+│   ├── SKILL.md                # Skill 源码
+│   ├── PLAN_TEMPLATE.md        # 执行计划模板
+│   └── AGENT_REGISTRY.example.json
+├── docs/
+│   ├── plan-action-guide.md    # 使用指南
+│   └── scan-results.md
+├── CHANGELOG.md
+├── LICENSE                     # MIT
+└── README.md / README.zh.md
 ```
-
-### 4. 五模块方案模板
-
-| 模块 | 内容 |
-|:----|:-----|
-| ① **目标理解与拆分** | 核心需求 / 子目标 / 边界约束 |
-| ② **技术路径与资源调度** | L2 链 / L3 Agent / Skill / MCP |
-| ③ **缺口与需协助事项** | 缺失 Skill / 需你决策 / 需提供 |
-| ④ **工作计划和节点** | 每节点：目标 / 验收 / 交付 / 负责人 / 工作量 |
-| ⑤ **任务编排** | 串联 / 并行依赖 / 风险与兜底 |
-
-> 更多方法论细节（五维可行性模型、三权分离、三道闸门质量控制等）请阅读 **[完整指南 →](docs/plan-action-guide.md)**
-
----
 
 ## 📄 许可证
 
-[MIT](LICENSE) © 2026 Ryan Dong
+MIT © 2026 Ryan Dong
+
+## 🌟 Star 历史
+
+[![Star History Chart](https://api.star-history.com/svg?repos=donglinfei-debug/claude-plan-action-skill&type=Date)](https://star-history.com/#donglinfei-debug/claude-plan-action-skill&Date)
 
 ## 📬 联系方式
 
-- **作者**: Ryan Dong
-- **邮箱**: donglinfei@gmail.com
-- **GitHub**: [donglinfei-debug](https://github.com/donglinfei-debug)
-
----
-
-> 先规划，后编码。一次做对，绝不返工。
+Ryan Dong — donglinfei@gmail.com
